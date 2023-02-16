@@ -1,1 +1,32 @@
+spring:
+  profiles:
+    group:
+      local: # ?? ??
+        - common
+        - local_db
+      prod: # ?? ??
+        - common
+        - deploy_db
 
+---
+
+# common part
+spring:
+  config:
+    activate:
+      on-profile: "common"
+
+server:
+  port: 8080
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: "local_db"
+  datasource:
+    url: jdbc:mysql://localhost:3306/local?serverTimezone=UTC&characterEncoding=UTF-8
+    username: local
+    password: local
+    driver-class-name: com.
