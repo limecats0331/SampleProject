@@ -36,6 +36,9 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
+
+	// https://mvnrepository.com/artifact/com.google.code.gson/gson
+	implementation 'com.google.code.gson:gson:2.9.0'
 }
 
 tasks.named('test') {
@@ -52,5 +55,19 @@ tasks.named('bootJar') {
 	dependsOn asciidoctor
 	from ("\$/html5") {
 		into 'static/docs'
+	}
+}
+
+tasks.register('copyPrivate') {
+	copy {
+		from '../../SsaMuSoConfig/main'
+		include "*.yml"
+		into 'src/main/resources'
+	}
+
+	copy {
+		from '../../SsaMuSoConfig/test'
+		include "*.yml"
+		into 'src/test/resources'
 	}
 }

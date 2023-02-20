@@ -26,7 +26,11 @@ spring:
     activate:
       on-profile: "local_db"
   datasource:
-    url: jdbc:mysql://localhost:3306/local?serverTimezone=UTC&characterEncoding=UTF-8
-    username: local
-    password: local
-    driver-class-name: com.
+    url: jdbc:h2:mem:testdb
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+
+logging:
+  level:
+    root: info
