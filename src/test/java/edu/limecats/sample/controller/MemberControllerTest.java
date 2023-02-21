@@ -4,12 +4,14 @@ import com.google.gson.Gson;
 import edu.limecats.sample.dto.ErrorDto;
 import edu.limecats.sample.dto.MemberSaveRequestDto;
 import edu.limecats.sample.exception.UserNameErrorException;
+import edu.limecats.sample.repository.MemberRepository;
 import edu.limecats.sample.service.MemberService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
@@ -25,12 +27,19 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class MemberControllerTest {
     @Autowired
     private MockMvc mockMvc;
-    @MockBean
+
+    //TODO : 찾아서 정리하기
+    @SpyBean
     private MemberService memberService;
+
+    //TODO : SpyBean, MockBean 차이 정리하기
+    @MockBean
+    private MemberRepository memberRepository;
     private Gson gson = new Gson();
 
     @Test
     public void 유저_저장_컨트롤러() throws Exception {
+        //TODO : 얘도 정리하기
         MemberSaveRequestDto inputDto = MemberSaveRequestDto.builder()
                 .username("member1")
                 .email("member1@member1.com")
@@ -62,7 +71,8 @@ class MemberControllerTest {
 
         mockMvc.perform(post("/member")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(content))
+                        .content(content)
+                        .characterEncoding("UTF-8"))
                 .andExpect(status().isBadRequest())
                 .andExpect(content().string(gson.toJson(errorDto)))
                 .andDo(print());

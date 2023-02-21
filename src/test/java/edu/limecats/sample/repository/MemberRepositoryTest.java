@@ -34,10 +34,12 @@ class MemberRepositoryTest {
         memberRepository.save(member2);
     }
 
-
     @Test
     void 아이디로_맴버_찾기() {
         Optional<Member> findMember1 = memberRepository.findById(this.member1.getId());
-        Assertions.assertThat(findMember1.get()).isEqualTo(member1);
+        Assertions.assertThat(findMember1.get().getId()).isEqualTo(member1.getId());
+        Assertions.assertThat(findMember1.get().getUsername()).isEqualTo(member1.getUsername());
+        Assertions.assertThat(findMember1.get().getEmail()).isEqualTo(member1.getEmail());
+        Assertions.assertThat(findMember1.get().getPassword()).isEqualTo(member1.getPassword());
     }
 }

@@ -3,11 +3,9 @@ package edu.limecats.sample.service;
 import edu.limecats.sample.domain.Member;
 import edu.limecats.sample.exception.UserNameErrorException;
 import edu.limecats.sample.repository.MemberRepository;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.assertj.core.api.Assertions.*;
