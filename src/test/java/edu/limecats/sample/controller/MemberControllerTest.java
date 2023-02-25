@@ -15,7 +15,6 @@ import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MockMvcBuilder;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -75,6 +74,7 @@ class MemberControllerTest {
                         .characterEncoding("UTF-8"))
                 .andExpect(status().isBadRequest())
                 .andExpect(content().string(gson.toJson(errorDto)))
+                //결과에 출력되는 부분, 안봐도 되면 없어도 무관
                 .andDo(print());
     }
 }

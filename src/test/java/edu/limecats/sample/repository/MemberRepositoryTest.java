@@ -1,13 +1,14 @@
 package edu.limecats.sample.repository;
 
 import edu.limecats.sample.domain.Member;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import java.util.Optional;
+
+import static org.assertj.core.api.Assertions.*;
 
 @DataJpaTest
 class MemberRepositoryTest {
@@ -34,12 +35,13 @@ class MemberRepositoryTest {
         memberRepository.save(member2);
     }
 
+    //TODO : 한번에 처리할 수 있는 방법 찾이보기
     @Test
     void 아이디로_맴버_찾기() {
         Optional<Member> findMember1 = memberRepository.findById(this.member1.getId());
-        Assertions.assertThat(findMember1.get().getId()).isEqualTo(member1.getId());
-        Assertions.assertThat(findMember1.get().getUsername()).isEqualTo(member1.getUsername());
-        Assertions.assertThat(findMember1.get().getEmail()).isEqualTo(member1.getEmail());
-        Assertions.assertThat(findMember1.get().getPassword()).isEqualTo(member1.getPassword());
+        assertThat(findMember1.get().getId()).isEqualTo(member1.getId());
+        assertThat(findMember1.get().getUsername()).isEqualTo(member1.getUsername());
+        assertThat(findMember1.get().getEmail()).isEqualTo(member1.getEmail());
+        assertThat(findMember1.get().getPassword()).isEqualTo(member1.getPassword());
     }
 }
