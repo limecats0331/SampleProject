@@ -5,6 +5,7 @@ import edu.limecats.sample.exception.UserNameErrorException;
 import edu.limecats.sample.repository.MemberRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
@@ -15,6 +16,7 @@ import static org.mockito.Mockito.*;
 class MemberServiceTest {
     @Mock
     MemberRepository memberRepository;
+    @InjectMocks
     MemberService memberService;
 
     @Test
@@ -32,7 +34,9 @@ class MemberServiceTest {
                 .build();
 
         doReturn(returnMember).when(memberRepository).save(member1);
-        memberService = new MemberService(memberRepository);
+
+        //InjectMocks 사용시 이렇게 넣지 않아도 된다.
+        //memberService = new MemberService(memberRepository);
 
         Member resultMember = memberService.memberSave(member1);
 
@@ -41,7 +45,6 @@ class MemberServiceTest {
 
     @Test
     void 멤버_저장_오류() {
-        memberService = new MemberService(memberRepository);
         Member errorMember = Member.builder()
                 .username("error")
                 .email("error@error.com")
