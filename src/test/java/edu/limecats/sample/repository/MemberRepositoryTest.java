@@ -3,8 +3,8 @@ package edu.limecats.sample.repository;
 import edu.limecats.sample.domain.Member;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.mock.mockito.SpyBean;
 
 import java.util.Optional;
 
@@ -12,9 +12,8 @@ import static org.assertj.core.api.Assertions.*;
 
 @DataJpaTest
 class MemberRepositoryTest {
-    @Autowired
+    @SpyBean
     private MemberRepository memberRepository;
-
     private Member member1;
     private Member member2;
 
@@ -39,6 +38,7 @@ class MemberRepositoryTest {
     @Test
     void 아이디로_맴버_찾기() {
         Optional<Member> findMember1 = memberRepository.findById(this.member1.getId());
+//        assertThat(findMember1.get()).isEqualTo(member1);
         assertThat(findMember1.get().getId()).isEqualTo(member1.getId());
         assertThat(findMember1.get().getUsername()).isEqualTo(member1.getUsername());
         assertThat(findMember1.get().getEmail()).isEqualTo(member1.getEmail());
